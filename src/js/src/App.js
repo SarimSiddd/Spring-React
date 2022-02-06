@@ -1,8 +1,11 @@
 import { Component } from 'react';
 import './App.css';
 import { getAllStudents } from './client';
-import  Clock  from './Clock';
+import Clock from './Clock';
 import Toggle from './Button';
+import {
+  Table
+} from 'antd';
 
 
 class App extends Component {
@@ -42,11 +45,11 @@ class App extends Component {
     }
 
     let printUser10Times = () => {
-      
+
       let array = [];
-      
+
       for (let i = 0; i < 10; i++) {
-        array.push(<h1 key = {i}>{format(user)}</h1>);
+        array.push(<h1 key={i}>{format(user)}</h1>);
       }
 
       console.log(array);
@@ -60,45 +63,66 @@ class App extends Component {
 
     const element = <h1>Hello {format(user)}!</h1>;
 
-    function Welcome(props)
-    {
+    function Welcome(props) {
       return <h1>Hello, {props.name}</h1>
     }
 
-    const welcomeElement = <Welcome name = "Sarim"/>;
+    const welcomeElement = <Welcome name="Sarim" />;
 
-    return (
-      <div>
-       {element2}
-       {element}
-       {welcomeElement}
-       <Clock/> 
-       <Toggle/>
-      </div>
-    );
+    // return (
+    //   <div>
+    //    {element2}
+    //    {element}
+    //    {welcomeElement}
+    //    <Clock/> 
+    //    <Toggle/>
+    //   </div>
+    // );
     //return this.Element;
 
-    //   const { students } = this.state;
+    const { students } = this.state;
 
-    //   if (students && students.length) {
+    if (students && students.length) {
 
-    //     return students.map((student, index) => {
+      const columns = [{
 
-    //       return (
-    //         <div key={index}>
-    //           <h2>{student.studentId}</h2>
-    //           <p>{student.firstName}</p>
-    //           <p>{student.lastName}</p>
-    //           <p>{student.email}</p>
-    //           <p>{student.gender}</p>
-    //         </div>
-    //       );
+        title: 'Student Id',
+        dataIndex: 'studentId',
+        key: 'studentId'
 
-    //     });
+      },
+      {
+        title: 'First Name',
+        dataIndex: 'firstName',
+        key: 'firstName'
+      },
+      {
+        title: 'Last Name',
+        dataIndex: 'lastName',
+        key: 'lastName'
+      },
+      {
+        title: 'Gender',
+        dataIndex: 'gender',
+        key: 'gender'
+      },
+      {
+        title: 'Email',
+        dataIndex: 'email',
+        key: 'email'
+      }
+      ];
 
-    //   }
+      return (
+        <Table
+          dataSource={students}
+          columns={columns}
+          rowKey='studentId' />
+      );
 
-    //   return <h1>No students found</h1>
+    }
+
+    return <h1>No students found</h1>
   }
 }
 
